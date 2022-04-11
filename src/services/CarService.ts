@@ -3,8 +3,8 @@ import Service, { IServiceError } from '.';
 import CarModel from '../models/CarModel';
 
 export default class CarService extends Service<Car> {
-  constructor() {
-    super(new CarModel());
+  constructor(public model = new CarModel()) {
+    super(model);
   }
 
   public create = async (car: Car): Promise<Car | null | IServiceError> => {
