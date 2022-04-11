@@ -8,7 +8,7 @@ export default class CustomRouter<T> {
     this.router = Router();
   }
 
-  public addRouter(
+  public addRoute(
     controller: Controller<T>,
     route: string = controller.route,
   ) {
