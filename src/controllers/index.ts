@@ -20,6 +20,7 @@ enum ControllerErros {
 enum StatusCode {
   OK = 200,
   CREATED,
+  NO_CONTENT = 204,
   BAD_REQUEST = 400,
   NOT_FOUND = 404,
   INTERNAL = 500,
@@ -63,4 +64,9 @@ export default abstract class Controller<T> {
     req: Request<{ id: string }>,
     res: Response<T | ResponseError>,
   ): Promise<typeof res>;
+
+  public abstract delete(
+    req: Request<{ id: string }>,
+    res: Response<T | ResponseError>,
+  ): Promise<typeof res | void>;
 }

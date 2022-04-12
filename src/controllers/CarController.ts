@@ -82,4 +82,28 @@ export default class CarController extends Controller<Car> {
         .status(this.status.INTERNAL).json({ error: this.errors.internal });
     }
   };
+
+  public delete = async (
+    req: Request<{ id: string }>,
+    res: Response<Car | ResponseError>,
+  ): Promise<typeof res | void> => {
+    try {
+      const { id } = req.params;
+
+      if (!isValidObjectId(id)) {
+        return res
+          .status(this.status.BAD_REQUEST)
+          .json({ error: this.errors.invalidId });
+      }
+
+      const car = await this.service.delete(id);
+
+      return car ? res.status(this.status.NO_CONTENT).end()
+        : res
+          .status(this.status.NOT_FOUND).json({ error: this.errors.notFound });
+    } catch (error) {
+      return res
+        .status(this.status.INTERNAL).json({ error: this.errors.internal });
+    }
+  };
 }
