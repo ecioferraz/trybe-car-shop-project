@@ -29,4 +29,16 @@ describe('CarModel', () => {
   //     expect(car).to.be.deep.eq(carMockList);
   //   });
   // });
+
+  // describe('readOne', () => {
+  //   before(() => Sinon.stub(carModel.model, 'findById').resolves(carMock));
+
+  //   after(() => Sinon.restore());
+
+  //   it('should return a car', async () => {
+  //     const car = await carModel.readOne(carMock._id);
+
+  //     expect(car).to.be.deep.eq(carMock);
+  //   });
+  // });
 });
