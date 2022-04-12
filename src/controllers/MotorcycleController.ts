@@ -75,7 +75,7 @@ export default class MotorcycleController extends Controller<Motorcycle> {
       }
 
       const motorcycle = await this.service.update(id, req.body);
-
+      
       return motorcycle ? res.json(motorcycle)
         : res
           .status(this.status.NOT_FOUND).json({ error: this.errors.notFound });

@@ -5,7 +5,12 @@ import MongoModel from './MongoModel';
 interface IMotorcycleDocument extends Motorcycle, Document { }
 
 const motorcycleSchema = new Schema<IMotorcycleDocument>({
-  category: Array,
+  model: String,
+  year: Number,
+  color: String,
+  status: Boolean,
+  buyValue: Number,
+  category: String,
   engineCapacity: Number,
 }, { versionKey: false });
 
