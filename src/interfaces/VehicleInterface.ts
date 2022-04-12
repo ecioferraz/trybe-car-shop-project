@@ -18,7 +18,7 @@ const VehicleSchema = z.object({
   buyValue: z.number({
     required_error: 'buyValue is required',
     invalid_type_error: 'buyValue must be an integer',
-  }),
+  }).int(),
 });
 
 type Vehicle = z.infer<typeof VehicleSchema>;
