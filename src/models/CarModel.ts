@@ -8,7 +8,7 @@ const carSchema = new Schema<ICarDocument>({
   model: String,
   year: Number,
   color: String,
-  status: Boolean || undefined,
+  status: Boolean,
   buyValue: Number,
   doorsQty: Number,
   seatsQty: Number,
