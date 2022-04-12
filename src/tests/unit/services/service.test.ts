@@ -43,7 +43,7 @@ describe('CarService', () => {
   });
 
   describe('update', () => {
-    before(() => Sinon.stub(carService.model, 'update').resolves(carMock));
+    before(() => Sinon.stub(carService.model, 'update').resolves({ ...carMock, doorsQty: 4 }));
 
     after(() => Sinon.restore());
 
@@ -51,6 +51,18 @@ describe('CarService', () => {
       const car = await carService.update(carMock._id, { ...carMock, doorsQty: 4 });
 
       expect(car).to.be.deep.eq({ ...carMock, doorsQty: 4 });
+    });
+  });
+
+  describe('delete', () => {
+    before(() => Sinon.stub(carService.model, 'delete').resolves(carMock));
+
+    after(() => Sinon.restore());
+
+    it('should return an deleted car', async () => {
+      const car = await carService.delete(carMock._id);
+
+      expect(car).to.be.deep.eq(carMock);
     });
   });
 });
