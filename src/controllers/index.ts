@@ -27,4 +27,17 @@ export default abstract class Controller<T> {
     req: IRequestWithBody<T>,
     res: Response<T | ResponseError>,
   ): Promise<typeof res>;
+
+  public read = async (
+    _req: Request,
+    res: Response<T[] | ResponseError>,
+  ): Promise<typeof res> => {
+    try {
+      const objs = await this.service.read();
+
+      return res.json(objs);
+    } catch (error) {
+      return res.status(500).json({ error: this.errors.internal });
+    }
+  };
 }

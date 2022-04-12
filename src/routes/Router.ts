@@ -13,6 +13,7 @@ export default class CustomRouter<T> {
     route: string = controller.route,
   ) {
     this.router.route(route)
-      .post(controller.create);
+      .post(controller.create)
+      .get(controller.read);
   }
 }

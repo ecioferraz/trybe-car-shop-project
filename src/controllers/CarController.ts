@@ -4,8 +4,11 @@ import CarService from '../services/CarService';
 import { Car } from '../interfaces/CarInterface';
 
 export default class CarController extends Controller<Car> {
-  constructor(private $route = '/cars') {
-    super(new CarService());
+  constructor(
+    public service = new CarService(),
+    private $route = '/cars',
+  ) {
+    super(service);
   }
 
   get route() { return this.$route; }

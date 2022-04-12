@@ -1,10 +1,10 @@
 // import Sinon from 'sinon';
 // import chai from 'chai';
 // import chaiHttp = require('chai-http');
-// import CarModel from '../../../models/CarModel';
+// import CarController from '../../../controllers/CarController';
 
-// import { Response } from 'superagent';
-// import { carMock } from '../mocks/carMocks';
+// // import { Response } from 'superagent';
+// import { carBodyMock, carMock } from '../mocks/carMocks';
 // import server from '../../../server';
 
 // chai.use(chaiHttp);
@@ -12,15 +12,15 @@
 // const { expect } = chai;
 
 // describe('CarController', () => {
-//   let chaiHttpResponse: Response;
-//   let carModel = new CarModel();
+//   // let chaiHttpResponse: Response;
+//   let carController = new CarController();
 
-//   before(async () => Sinon.stub(carModel.model, 'create').resolves(carMock));
+//   before(async () => Sinon.stub(carController.service, 'create').resolves(carMock));
 
 //   after(()=> Sinon.restore());
 
 //   it('should return status 201', async () => {
-//     chaiHttpResponse = await chai.request(server).post('/cars');
+//     const chaiHttpResponse = await chai.request(server).post('/cars').send(carBodyMock);
 
 //     expect(chaiHttpResponse).to.have.status(201);
 //   });
