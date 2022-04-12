@@ -1,3 +1,4 @@
+import { isValidObjectId } from 'mongoose';
 import { Request, Response } from 'express';
 import Controller, { IRequestWithBody, ResponseError } from '.';
 import CarService from '../services/CarService';
@@ -22,8 +23,7 @@ export default class CarController extends Controller<Car> {
 
       if (!car) {
         return res
-          .status(this.status.INTERNAL)
-          .json({ error: this.errors.internal });
+          .status(this.status.INTERNAL).json({ error: this.errors.internal });
       }
 
       if ('error' in car) return res.status(this.status.BAD_REQUEST).json(car);
@@ -31,8 +31,7 @@ export default class CarController extends Controller<Car> {
       return res.status(this.status.CREATED).json(car);
     } catch (error) {
       return res
-        .status(this.status.INTERNAL)
-        .json({ error: this.errors.internal });
+        .status(this.status.INTERNAL).json({ error: this.errors.internal });
     }
   };
 
@@ -42,16 +41,21 @@ export default class CarController extends Controller<Car> {
   ): Promise<typeof res> => {
     try {
       const { id } = req.params;
+
+      if (!isValidObjectId(id)) {
+        return res
+          .status(this.status.BAD_REQUEST)
+          .json({ error: this.errors.invalidId });
+      }
+
       const car = await this.service.readOne(id);
 
       return car ? res.json(car)
         : res
-          .status(this.status.NOT_FOUND)
-          .json({ error: this.errors.notFound });
+          .status(this.status.NOT_FOUND).json({ error: this.errors.notFound });
     } catch (error) {
       return res
-        .status(this.status.INTERNAL)
-        .json({ error: this.errors.internal });
+        .status(this.status.INTERNAL).json({ error: this.errors.internal });
     }
   };
 }

@@ -15,5 +15,8 @@ export default class CustomRouter<T> {
     this.router.route(route)
       .post(controller.create)
       .get(controller.read);
+
+    this.router.route(`${route}/:id`)
+      .get(controller.readOne);
   }
 }

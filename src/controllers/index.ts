@@ -11,9 +11,10 @@ export interface IRequestWithBody<T> extends Request {
 
 enum ControllerErros {
   internal = 'Internal Server Error',
-  notFound = 'Car not found',
+  notFound = 'Object not found',
   requiredId = 'Id is required',
   badRequest = 'Bad request',
+  invalidId = 'Id must have 24 hexadecimal characters',
 }
 
 enum StatusCode {
