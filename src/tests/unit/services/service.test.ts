@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import Sinon from "sinon";
 import CarService from "../../../services/CarService";
-import { carMock, carMockList } from "../mocks/carMocks";
+import { carMock, carListMock } from "../mocks/carMocks";
 
 describe('CarService', () => {
   let carService = new CarService();
@@ -19,14 +19,14 @@ describe('CarService', () => {
   });
 
   describe('read', () => {
-    before(() => Sinon.stub(carService.model, 'read').resolves(carMockList));
+    before(() => Sinon.stub(carService.model, 'read').resolves(carListMock));
 
     after(() => Sinon.restore());
 
     it('should return a list of cars', async () => {
       const car = await carService.read();
 
-      expect(car).to.be.deep.eq(carMockList);
+      expect(car).to.be.deep.eq(carListMock);
     });
   });
 

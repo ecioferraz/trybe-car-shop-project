@@ -1,10 +1,13 @@
 import { expect } from 'chai';
 import Sinon from 'sinon';
+import { Motorcycle } from '../../../interfaces/MotorcycleInterface';
 import CarModel from '../../../models/CarModel';
-import { carMock, carMockList } from '../mocks/carMocks';
+import MotorcycleModel from '../../../models/MotorcycleModel';
+import { carMock, carListMock } from '../mocks/carMocks';
+import { motoMock, motoListMock } from '../mocks/motocycleMocks';
 
 describe('CarModel', () => {
-  let carModel = new CarModel();
+  const carModel = new CarModel();
 
   describe('create', () => {
     before(() => Sinon.stub(carModel.model, 'create').resolves(carMock));
@@ -19,14 +22,14 @@ describe('CarModel', () => {
   });
 
   describe('read', () => {
-    before(() => Sinon.stub(carModel.model, 'find').resolves(carMockList as any[]));
+    before(() => Sinon.stub(carModel.model, 'find').resolves(carListMock as any[]));
 
     after(() => Sinon.restore());
 
     it('should return a list of all cars', async () => {
       const car = await carModel.read();
 
-      expect(car).to.be.deep.eq(carMockList);
+      expect(car).to.be.deep.eq(carListMock);
     });
   });
 
@@ -63,6 +66,70 @@ describe('CarModel', () => {
       const car = await carModel.delete(carMock._id);
 
       expect(car).to.be.deep.eq(carMock);
+    });
+  });
+});
+
+describe('MotorcycleModel', () => {
+  let motorcycleModel = new MotorcycleModel();
+
+  describe('create', () => {
+    before(() => Sinon.stub(motorcycleModel.model, 'create').resolves(motoMock));
+
+    after(() => Sinon.restore());
+
+    it('should return a new motorcycle created', async () => {
+      const motorcycle = await motorcycleModel.create(motoMock as Motorcycle);
+
+      expect(motorcycle).to.be.deep.eq(motoMock);
+    });
+  });
+
+  describe('read', () => {
+    before(() => Sinon.stub(motorcycleModel.model, 'find').resolves(motoListMock as any[]));
+
+    after(() => Sinon.restore());
+
+    it('should return a list of all motorcycles', async () => {
+      const motorcycle = await motorcycleModel.read();
+
+      expect(motorcycle).to.be.deep.eq(motoListMock);
+    });
+  });
+
+  describe('readOne', () => {
+    before(() => Sinon.stub(motorcycleModel.model, 'findById').resolves(motoMock as any));
+
+    after(() => Sinon.restore());
+
+    it('should return a motorcycle', async () => {
+      const motorcycle = await motorcycleModel.readOne(motoMock._id);
+
+      expect(motorcycle).to.be.deep.eq(motoMock);
+    });
+  });
+
+  describe('update', () => {
+    before(() => Sinon.stub(motorcycleModel.model, 'findByIdAndUpdate').resolves({ ...motoMock, doorsQty: 4 } as any));
+
+    after(() => Sinon.restore());
+
+    it('should return an updated motorcycle', async () => {
+      const motorcycle = await motorcycleModel.update(motoMock._id, { ...motoMock, color: "black" } as Motorcycle);
+
+      expect(motorcycle).to.be.deep.eq({ ...motoMock, doorsQty: 4 });
+    });
+  });
+
+  describe('delete', () => {
+    before(() => Sinon.stub(motorcycleModel.model, 'findByIdAndDelete').resolves(motoMock as any));
+
+    after(() => Sinon.restore());
+
+    it('should return an deleted motorcycle', async () => {
+      const motorcycle = await motorcycleModel.delete(motoMock._id);
+
+      expect(motorcycle).to.be.deep.eq(motoMock);
     });
   });
 });
