@@ -1,10 +1,10 @@
-import CustomRouter from './routes/Router';
 import App from './app';
+import CustomRouter from './routes/Router';
 
 import CarController from './controllers/CarController';
+import MotorcycleController from './controllers/MotorcycleController';
 
 import { Car } from './interfaces/CarInterface';
-import MotorcycleController from './controllers/MotorcycleController';
 import { Motorcycle } from './interfaces/MotorcycleInterface';
 
 const server = new App();
