@@ -1,4 +1,4 @@
-import { isValidObjectId } from 'mongoose';
+import { Document, isValidObjectId } from 'mongoose';
 import { Request, Response } from 'express';
 import Controller, { IRequestWithBody, ResponseError } from '.';
 import MotorcycleService from '../services/MotorcycleService';
@@ -38,7 +38,7 @@ export default class MotorcycleController extends Controller<Motorcycle> {
   };
 
   public readOne = async (
-    req: Request<{ id: string }>,
+    req: Request<{ id: Document['id'] }>,
     res: Response<Motorcycle | ResponseError>,
   ): Promise<typeof res> => {
     try {
@@ -62,7 +62,7 @@ export default class MotorcycleController extends Controller<Motorcycle> {
   };
 
   public update = async (
-    req: Request<{ id: string }>,
+    req: Request<{ id: Document['id'] }>,
     res: Response<Motorcycle | ResponseError>,
   ): Promise<typeof res> => {
     try {
@@ -86,7 +86,7 @@ export default class MotorcycleController extends Controller<Motorcycle> {
   };
 
   public delete = async (
-    req: Request<{ id: string }>,
+    req: Request<{ id: Document['id'] }>,
     res: Response<Motorcycle | ResponseError>,
   ): Promise<typeof res | void> => {
     try {

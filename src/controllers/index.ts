@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Document } from 'mongoose';
 import Service from '../services';
 
 export type ResponseError = {
@@ -56,17 +57,17 @@ export default abstract class Controller<T> {
   };
 
   public abstract readOne(
-    req: Request<{ id: string }>,
+    req: Request<{ id: Document['id'] }>,
     res: Response<T | ResponseError>,
   ): Promise<typeof res>;
 
   public abstract update(
-    req: Request<{ id: string }>,
+    req: Request<{ id: Document['id'] }>,
     res: Response<T | ResponseError>,
   ): Promise<typeof res>;
 
   public abstract delete(
-    req: Request<{ id: string }>,
+    req: Request<{ id: Document['id'] }>,
     res: Response<T | ResponseError>,
   ): Promise<typeof res | void>;
 }
