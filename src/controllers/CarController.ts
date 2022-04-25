@@ -1,8 +1,9 @@
-import { Document, isValidObjectId } from 'mongoose';
+import { isValidObjectId } from 'mongoose';
 import { Request, Response } from 'express';
 import Controller, { IRequestWithBody, ResponseError } from '.';
 import CarService from '../services/CarService';
 import { Car } from '../interfaces/CarInterface';
+import { IVehicle } from '../interfaces/VehicleInterface';
 
 export default class CarController extends Controller<Car> {
   constructor(
@@ -36,7 +37,7 @@ export default class CarController extends Controller<Car> {
   };
 
   public readOne = async (
-    req: Request<{ id: Document['id'] }>,
+    req: Request<{ id: IVehicle['id'] }>,
     res: Response<Car | ResponseError>,
   ): Promise<typeof res> => {
     try {
@@ -60,7 +61,7 @@ export default class CarController extends Controller<Car> {
   };
 
   public update = async (
-    req: Request<{ id: Document['id'] }>,
+    req: Request<{ id: IVehicle['id'] }>,
     res: Response<Car | ResponseError>,
   ): Promise<typeof res> => {
     try {
@@ -84,7 +85,7 @@ export default class CarController extends Controller<Car> {
   };
 
   public delete = async (
-    req: Request<{ id: Document['id'] }>,
+    req: Request<{ id: IVehicle['id'] }>,
     res: Response<Car | ResponseError>,
   ): Promise<typeof res | void> => {
     try {

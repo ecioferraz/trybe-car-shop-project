@@ -1,6 +1,6 @@
-import { Document } from 'mongoose';
 import { ZodError } from 'zod';
 import { Model } from '../interfaces/ModelInterface';
+import { IVehicle } from '../interfaces/VehicleInterface';
 
 export interface IServiceError {
   error: ZodError,
@@ -14,7 +14,7 @@ export default abstract class Service<T> {
 
   public read = async (): Promise<T[]> => this.model.read();
 
-  public readOne = async (id: Document['id']):
+  public readOne = async (id: IVehicle['id']):
   Promise<T | null | IServiceError> =>
     this.model.readOne(id);
 
@@ -23,7 +23,7 @@ export default abstract class Service<T> {
     obj: T,
   ): Promise<T | null | IServiceError> => this.model.update(id, obj);
 
-  public delete = async (id: Document['id']):
+  public delete = async (id: IVehicle['id']):
   Promise<T | null | IServiceError> =>
     this.model.delete(id);
 }

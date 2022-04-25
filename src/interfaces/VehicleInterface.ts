@@ -23,7 +23,12 @@ const VehicleSchema = z.object({
 
 type Vehicle = z.infer<typeof VehicleSchema>;
 
+interface IVehicle extends Vehicle {
+  id: string,
+}
+
 export {
   Vehicle,
   VehicleSchema,
+  IVehicle,
 };
