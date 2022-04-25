@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Document } from 'mongoose';
+import { IVehicle } from '../interfaces/VehicleInterface';
 import Service from '../services';
 
 export type ResponseError = {
@@ -57,17 +57,17 @@ export default abstract class Controller<T> {
   };
 
   public abstract readOne(
-    req: Request<{ id: Document['id'] }>,
+    req: Request<{ id: IVehicle['id'] }>,
     res: Response<T | ResponseError>,
   ): Promise<typeof res>;
 
   public abstract update(
-    req: Request<{ id: Document['id'] }>,
+    req: Request<{ id: IVehicle['id'] }>,
     res: Response<T | ResponseError>,
   ): Promise<typeof res>;
 
   public abstract delete(
-    req: Request<{ id: Document['id'] }>,
+    req: Request<{ id: IVehicle['id'] }>,
     res: Response<T | ResponseError>,
   ): Promise<typeof res | void>;
 }
